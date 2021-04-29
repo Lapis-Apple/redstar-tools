@@ -75,7 +75,7 @@ X2N4YV9maW5hbGl6ZUBAR0xJQkNfMi4xLjMAX2luaXQA"
 
 check_euid(){
     if [ "$(id -u)" != 0 ]; then
-        echo "You need root privileges to run this script!"
+        echo 'You have to run this script as root. get root by run command "rootsetting", then run "su" to switch to root user.'
         exit 1
     fi
 }
@@ -100,6 +100,15 @@ remove_autostarts(){
     mv /etc/init/ctguard.conf /etc/init/ctguard.conf.bak 2>/dev/null
 }
 
+connect_to_internet(){
+    mv /etc/sysconfig/iptables /etc/sysconfig/iptables.bak/
+}
+
+set_language_to_english(){
+    sed -i 's/ko_KP/en_US/g' /etc/sysconfig/i18n /usr/share/config/kdeglobals
+}
+
+
 main(){
     check_euid
     
@@ -121,7 +130,13 @@ main(){
     echo "Disabling scnprc autostart"
     remove_autostarts
     
-    echo "Done. Please press Return to reboot the system."
+    echo "Setting system to English"
+    set_language_to_english
+    
+    echo "Connecting internet"
+    connect_to_internet
+    
+    echo "Done! Press Return now to reboot the system."
     read -r
     reboot
 }
