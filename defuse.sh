@@ -112,31 +112,33 @@ set_language_to_english(){
 main(){
     check_euid
     
-    echo "Disabling SELinux"
+    echo "Welcome to Red Star Defuse.."
+    
     disable_selinux
+    echo "Disabled SELinux!"
     
-    echo "Killing securityd"
     killall -9 securityd 2>/dev/null
+    echo "Killed securityd!"
     
-    echo "Disabling rtscan"
     disable_rtscan
+    echo "Disabled rtscan!"
     
-    echo "Killing scnprc and opprc"
     killall scnprc opprc 2>/dev/null
+    echo "Killed scnprc and opprc!"
     
-    echo "Replacing libos"
     replace_libos
+    echo "Replaced libos!"
     
-    echo "Disabling scnprc autostart"
     remove_autostarts
+    echo "Deleted scnprc autostart!"
     
-    echo "Setting system to English"
     set_language_to_english
+    echo "System is now English!"
     
-    echo "Connecting internet"
     connect_to_internet
+    echo "Fixed Internet!"
     
-    echo "Done! Press Return now to reboot the system."
+    echo "All Set! Press Return now to reboot the system."
     read -r
     reboot
 }
