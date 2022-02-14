@@ -101,7 +101,7 @@ remove_autostarts(){
 }
 
 connect_to_internet(){
-    mv /etc/sysconfig/iptables /etc/sysconfig/iptables.bak/
+    mv /etc/sysconfig/iptables /etc/sysconfig/iptables.bak
 }
 
 set_language_to_english(){
